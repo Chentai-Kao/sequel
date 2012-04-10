@@ -1,0 +1,93 @@
+Just a homework of the course -- Introduction to database
+Implementation of a small database.
+Support a small subset of standard SQL command.
+Some examples are given below.
+
+
+
+-----Examples-----
+(check no test.out in ./bin)
+
+./sequel
+.help
+.exit
+
+./sequel
+.quit
+
+./sequel
+CREATE TABLE mytable (attr1 INT, attr2 CHAR(20), attr3 VARCHAR(9), attr4 DOUBLE, PRIMARY KEY (attr2), UNIQUE(attr1));
+INSERT INTO mytable (attr1, attr3, attr2) VALUES (1, 'abc', 'def');
+SELECT * FROM mytable;
+INSERT INTO mytable (attr2, attr3) VALUES ('ef', 'dd');
+INSERT INTO mytable (attr1, attr2) VALUES (1, 'nonononon');
+INSERT INTO mytable (attr1, attr2, attr4) VALUES (3, 'pp6', .23);
+INSERT INTO mytable (attr1, attr2, attr4) VALUES (4, 'pp7', .23);
+INSERT INTO mytable (attr2, attr4) VALUES ('pp8', 1.1);
+INSERT INTO mytable (attr2, attr3) VALUES ('-2', 'hallll');
+INSERT INTO mytable (attr8) VALUES (-1.23);
+INSERT INTO mytable (attr1, attr2) VALUES (5, 'hbha');
+SELECT * FROM mytable;
+SELECT * FROM mytable WHERE attr1=5;
+SELECT attr1 FROM mytable;
+SELECT attr1, attr3 FROM mytable WHERE attr1=1;
+SELECT attr1, attr3 FROM mytable WHERE attr1<>1;
+SELECT attr2, attr1 FROM mytable WHERE attr4>=.23;
+SELECT attr3, attr2, attr1 FROM mytable WHERE attr3='dd';
+SELECT attr2, attr1 FROM mytable WHERE attr2>='pp7';
+
+.read test_case
+
+CREATE TABLE mytable (attr1 INT);
+
+.echo on
+SELECT * FROM mytable;
+.echo off
+.echo OFF
+SELECT * FROM mytable;
+
+.tables
+CREATE TABLE mytable2 (attr1 INT);
+.tables
+.tables mytable
+.tables mytable2
+.tables mytable lala mytable2
+
+DROP TABLE mytable;
+.tables
+.read test_case
+.tables
+
+.schema
+.schema mytable
+.schema mytable2
+
+.mode csv
+SELECT * FROM mytable;
+.mode list
+SELECT * FROM mytable;
+
+.output test.out
+.dump
+.quit
+(check "test.out")
+
+./sequel
+.read test.out
+SELECT * FROM mytable;
+CREATE TABLE mytable2 (attr1 INT, attr2 CHAR(2));
+DROP TABLE mytable2;
+CREATE TABLE mytable2 (attr1 INT, attr2 CHAR(2));
+INSERT INTO mytable2 VALUES(2, 'hhkk');
+INSERT INTO mytable2 VALUES(2, 'hh');
+SELECT * FROM mytable2;
+INSERT INTO mytable2 (attr1, attr2) VALUES(50, 'tyty', 100);
+INSERT INTO mytable2 (attr1, attr2) VALUES(NULL, 'ty');
+SELECT * FROM mytable2;
+.output test2.out
+.dump mytable2
+.output stdout
+.dump mytable2
+.quit
+(check "test2.out")
+
